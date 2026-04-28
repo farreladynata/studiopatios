@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio Patio — Interior Design</title>
+  <meta name="description" content="Studio Patio adalah interior design studio di Batam yang menghadirkan ruang residensial, komersial, dan hospitality yang bermakna." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+<style>
+/* ==============================
+   RESET & BASE
+============================== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --cream:      #F5F2EC;
+  --warm:       #FAF8F4;
+  --charcoal:   #2A2825;
+  --dark2:      #3A3733;
+  --mid:        #6B6760;
+  --border:     #DDD9D0;
+  --accent:     #9B8E7E;
+  --accent2:    #7A6E61;
+  --serif:      'Cormorant Garamond', Georgia, serif;
+  --sans:       'Jost', sans-serif;
+  --ease:       0.35s ease;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--warm); color: var(--charcoal); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ==============================
+   UTILITY
+============================== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+.eyebrow {
+  font-family: var(--sans); font-size: .6rem; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+}
+.sec-title {
+  font-family: var(--serif); font-size: clamp(2rem,3.5vw,3.2rem);
+  font-weight: 300; line-height: 1.15; color: var(--charcoal);
+}
+.sec-title em { font-style: italic; }
+.sec-title.light { color: var(--warm); }
+.body-text { font-family: var(--sans); font-size: .85rem; line-height: 2; color: var(--mid); font-weight: 300; }
+
+.btn-primary {
+  display: inline-block; background: var(--charcoal); color: var(--warm);
+  font-family: var(--sans); font-size: .65rem; letter-spacing: .2em;
+  text-transform: uppercase; padding: .9rem 2.2rem;
+  border: none; cursor: pointer; transition: background var(--ease);
+}
+.btn-primary:hover { background: var(--accent2); }
+.btn-ghost {
+  font-family: var(--sans); font-size: .65rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--mid);
+  display: inline-flex; align-items: center; gap: .4rem;
+  transition: color var(--ease);
+}
+.btn-ghost:hover { color: var(--charcoal); }
+.btn-outline {
+  display: inline-block; font-family: var(--sans); font-size: .65rem;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--warm);
+  border: .5px solid rgba(255,255,255,.3); padding: .9rem 2.5rem;
+  transition: border-color var(--ease), background var(--ease);
+}
+.btn-outline:hover { border-color: var(--warm); background: rgba(255,255,255,.05); }
+
+.sec-pad { padding: 6rem 0; }
+.bg-cream    { background: var(--cream); }
+.bg-white    { background: var(--warm); }
+.bg-dark     { background: var(--charcoal); }
+
+/* ==============================
+   NAV
+============================== */
+.nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 4rem;
+  background: rgba(250,248,244,.93);
+  backdrop-filter: blur(10px);
+  border-bottom: .5px solid var(--border);
+  transition: padding var(--ease);
+}
+.nav.scrolled { padding: 1rem 4rem; }
+.nav-logo { display:flex; align-items:center; gap:.75rem; font-family: var(--serif); }
+.logo-mark { font-size:1.5rem; font-weight:400; color:var(--charcoal); line-height:1; }
+.logo-mark .div { font-size:1.2rem; color:var(--accent); margin:0 .1rem; font-weight:200; }
+.logo-text { font-size:.65rem; letter-spacing:.28em; text-transform:uppercase; font-weight:300; }
+.nav-links { display:flex; gap:2.5rem; }
+.nav-links a {
+  font-family:var(--sans); font-size:.68rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--mid); transition:color var(--ease);
+}
+.nav-links a:hover, .nav-links a.active { color:var(--charcoal); }
+.nav-cta {
+  font-family:var(--sans); font-size:.65rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--charcoal);
+  border:.5px solid var(--charcoal); padding:.6rem 1.4rem;
+  transition: background var(--ease), color var(--ease);
+}
+.nav-cta:hover { background:var(--charcoal); color:var(--warm); }
+
+/* Burger */
+.burger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+.burger span { display:block; width:22px; height:1px; background:var(--charcoal); transition:all var(--ease); }
+.burger.open span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity:0; }
+.burger.open span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
+
+/* Mobile menu */
+.mob-menu {
+  display:none; position:fixed; inset:0; z-index:99;
+  background:var(--warm); flex-direction:column;
+  align-items:center; justify-content:center; gap:2rem;
+  opacity:0; pointer-events:none; transition:opacity var(--ease);
+}
+.mob-menu.open { display:flex; opacity:1; pointer-events:all; }
+.mob-menu ul { display:flex; flex-direction:column; align-items:center; gap:2rem; }
+.mob-menu a { font-family:var(--serif); font-size:1.8rem; font-weight:300; color:var(--charcoal); }
+.mob-menu .btn-primary { font-family:var(--sans); font-size:.65rem; }
+
+/* ==============================
+   HERO
+============================== */
+.hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; padding-top:80px; }
+.hero-left { display:flex; flex-direction:column; justify-content:center; padding:6rem 4rem; }
+.hero-title {
+  font-family:var(--serif); font-size:clamp(3rem,5vw,5rem);
+  font-weight:300; line-height:1.1; color:var(--charcoal); margin-bottom:2rem;
+}
+.hero-title em { font-style:italic; color:var(--accent); }
+.hero-desc { font-family:var(--sans); font-size:.85rem; line-height:1.9; color:var(--mid); max-width:360px; margin-bottom:3rem; font-weight:300; }
+.hero-actions { display:flex; gap:1.5rem; align-items:center; }
+.hero-right { position:relative; overflow:hidden; }
+.hero-bg {
+  width:100%; height:100%; min-height:100vh;
+  background:linear-gradient(135deg,#E8E4DC,#D4CFC4 50%,#C8C2B5);
+  display:flex; align-items:center; justify-content:center; position:relative;
+}
+.hero-bg::before {
+  content:''; position:absolute;
+  top:20%; left:15%; right:15%; bottom:20%;
+  border:.5px solid rgba(150,140,125,.4);
+}
+.hero-bg-label { font-family:var(--serif); font-size:.8rem; letter-spacing:.3em; text-transform:uppercase; color:var(--accent); font-weight:300; }
+.hero-stats { position:absolute; bottom:2.5rem; left:2.5rem; display:flex; gap:2.5rem; }
+.stat-num { font-family:var(--serif); font-size:2rem; font-weight:300; color:var(--charcoal); line-height:1; }
+.stat-lbl { font-family:var(--sans); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--mid); margin-top:.3rem; }
+
+/* ==============================
+   ABOUT
+============================== */
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; margin-top:4rem; }
+.about-img {
+  aspect-ratio:4/5; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(160deg,#D9D4C9,#C5BEB1);
+}
+.about-img::after {
+  content:''; position:absolute;
+  top:-1.5rem; left:-1.5rem; right:1.5rem; bottom:1.5rem;
+  border:.5px solid var(--border); pointer-events:none;
+}
+.img-lbl { font-family:var(--serif); font-size:.8rem; letter-spacing:.3em; text-transform:uppercase; color:var(--accent); font-weight:300; }
+.values { margin-top:2.5rem; border-top:.5px solid var(--border); padding-top:2rem; display:flex; flex-direction:column; gap:1.4rem; }
+.val-item { display:flex; gap:1.5rem; }
+.val-num { font-family:var(--serif); font-size:.9rem; color:var(--accent); font-weight:300; min-width:2rem; padding-top:.1rem; }
+.val-body { font-family:var(--sans); font-size:.78rem; color:var(--charcoal); font-weight:300; line-height:1.7; }
+.val-body strong { font-weight:400; display:block; margin-bottom:.2rem; }
+.val-body p { color:var(--mid); }
+
+/* ==============================
+   SERVICES
+============================== */
+.svc-grid { display:grid; grid-template-columns:repeat(3,1fr); border:.5px solid var(--border); margin-top:4rem; }
+.svc-card { padding:2.5rem; border-right:.5px solid var(--border); transition:background var(--ease); cursor:pointer; }
+.svc-card:last-child { border-right:none; }
+.svc-card:hover { background:var(--cream); }
+.svc-num { font-family:var(--serif); font-size:.85rem; color:var(--accent); font-weight:300; margin-bottom:1.5rem; }
+.svc-name { font-family:var(--serif); font-size:1.4rem; font-weight:300; color:var(--charcoal); margin-bottom:1rem; line-height:1.3; }
+.svc-desc { font-family:var(--sans); font-size:.75rem; line-height:1.8; color:var(--mid); font-weight:300; }
+.svc-arrow { display:inline-block; margin-top:2rem; font-size:1rem; color:var(--accent); transition:transform var(--ease); }
+.svc-card:hover .svc-arrow { transform:translateX(6px); }
+
+/* ==============================
+   PORTFOLIO — GRID
+============================== */
+.porto-filter { display:flex; gap:0; border-bottom:.5px solid var(--border); margin-top:3rem; }
+.pf-btn {
+  font-family:var(--sans); font-size:.62rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--mid); background:none;
+  border:none; border-right:.5px solid var(--border); padding:1rem 2rem;
+  cursor:pointer; position:relative; transition:color .25s; white-space:nowrap;
+}
+.pf-btn::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1.5px; background:var(--charcoal); transform:scaleX(0); transition:transform .3s; }
+.pf-btn.active, .pf-btn:hover { color:var(--charcoal); }
+.pf-btn.active::after { transform:scaleX(1); }
+
+.porto-grid {
+  columns:3; column-gap:1rem; margin-top:2rem;
+}
+.porto-card {
+  break-inside:avoid; margin-bottom:1rem;
+  overflow:hidden; cursor:pointer; position:relative;
+  transition:opacity .3s;
+}
+.porto-card.hidden { display:none; }
+.porto-thumb {
+  width:100%; height:260px; display:flex; align-items:center; justify-content:center;
+  position:relative; transition:transform .55s ease; overflow:hidden;
+}
+.porto-card.tall .porto-thumb { height:380px; }
+.porto-card.wide .porto-thumb { height:200px; }
+.porto-card:hover .porto-thumb { transform:scale(1.04); }
+.porto-thumb-lbl {
+  font-family:var(--serif); font-size:.75rem; letter-spacing:.25em;
+  text-transform:uppercase; font-weight:300;
+}
+.porto-thumb-lbl.d { color:rgba(100,90,80,.4); }
+.porto-thumb-lbl.l { color:rgba(230,220,210,.35); }
+.porto-thumb::after {
+  content:''; position:absolute; inset:0;
+  background:rgba(42,40,37,0); transition:background .4s;
+}
+.porto-card:hover .porto-thumb::after { background:rgba(42,40,37,.18); }
+.porto-info { padding:.9rem 0 .5rem; border-bottom:.5px solid var(--border); }
+.porto-tag { font-family:var(--sans); font-size:.57rem; letter-spacing:.25em; text-transform:uppercase; color:var(--accent); }
+.porto-title { font-family:var(--serif); font-size:1.1rem; font-weight:300; color:var(--charcoal); margin-top:.25rem; line-height:1.3; }
+.porto-loc { font-family:var(--sans); font-size:.7rem; color:var(--mid); font-weight:300; margin-top:.2rem; }
+.porto-hint { display:block; font-family:var(--sans); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-top:.5rem; opacity:0; transform:translateX(-6px); transition:opacity .3s, transform .3s; }
+.porto-card:hover .porto-hint { opacity:1; transform:translateX(0); }
+
+/* ==============================
+   PORTFOLIO — DETAIL (PANEL)
+============================== */
+.detail-panel {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:var(--warm); overflow-y:auto;
+}
+.detail-panel.open { display:block; animation:slideUp .4s ease; }
+@keyframes slideUp { from { transform:translateY(40px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+
+.dp-nav {
+  position:sticky; top:0; z-index:10; display:flex; justify-content:space-between; align-items:center;
+  padding:1.2rem 4rem; background:rgba(250,248,244,.95); backdrop-filter:blur(8px);
+  border-bottom:.5px solid var(--border);
+}
+.dp-back {
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-family:var(--sans); font-size:.62rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--mid); cursor:pointer;
+  background:none; border:none; transition:color var(--ease);
+}
+.dp-back:hover { color:var(--charcoal); }
+.dp-nav-logo { font-family:var(--serif); font-size:1.1rem; font-weight:300; letter-spacing:.15em; color:var(--charcoal); }
+.dp-nav-logo span { color:var(--accent); }
+
+/* Hero */
+.dp-hero { height:75vh; position:relative; overflow:hidden; }
+.dp-hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; transform:scale(1.04); animation:hzoom 7s ease forwards; }
+@keyframes hzoom { to { transform:scale(1); } }
+.dp-hero-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(30,28,26,.72) 0%, rgba(30,28,26,.05) 60%);
+  display:flex; align-items:flex-end; padding:3rem 4rem;
+}
+.dp-cat { font-family:var(--sans); font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.6rem; }
+.dp-title { font-family:var(--serif); font-size:clamp(2.5rem,5vw,4.5rem); font-weight:300; color:var(--warm); line-height:1.05; }
+.dp-loc { font-family:var(--sans); font-size:.72rem; letter-spacing:.15em; color:rgba(255,255,255,.5); font-weight:300; margin-top:.5rem; }
+
+/* Info */
+.dp-info { display:grid; grid-template-columns:1.4fr 1fr; gap:5rem; align-items:start; padding:4rem 0; }
+.dp-desc-title { font-family:var(--serif); font-size:clamp(1.4rem,2.5vw,2rem); font-weight:300; color:var(--charcoal); margin-bottom:1.2rem; line-height:1.25; }
+.dp-meta { border:.5px solid var(--border); display:grid; grid-template-columns:1fr 1fr; }
+.dp-meta-item { padding:1.1rem 1.3rem; border-right:.5px solid var(--border); border-bottom:.5px solid var(--border); display:flex; flex-direction:column; gap:.25rem; }
+.dp-meta-item:nth-child(even) { border-right:none; }
+.dp-meta-item:nth-last-child(-n+2) { border-bottom:none; }
+.dp-ml { font-family:var(--sans); font-size:.55rem; letter-spacing:.25em; text-transform:uppercase; color:var(--accent); }
+.dp-mv { font-family:var(--sans); font-size:.82rem; color:var(--charcoal); font-weight:300; }
+
+/* Gallery */
+.dp-gallery { padding-bottom:5rem; }
+.gal-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem; margin-top:2.5rem; }
+.gal-item {
+  position:relative; overflow:hidden; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  aspect-ratio:4/3;
+}
+.gal-item:first-child { grid-column:span 2; aspect-ratio:16/9; }
+.gal-item-lbl {
+  font-family:var(--serif); font-size:.72rem; letter-spacing:.2em;
+  text-transform:uppercase; font-weight:300; pointer-events:none;
+}
+.gal-item-lbl.d { color:rgba(110,102,92,.38); }
+.gal-item-lbl.l { color:rgba(220,212,200,.35); }
+.gal-hover {
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:.4rem;
+  background:rgba(42,40,37,0); transition:background .35s; z-index:2;
+}
+.gal-item:hover .gal-hover { background:rgba(42,40,37,.45); }
+.gal-zoom { font-size:1.3rem; color:var(--warm); opacity:0; transform:scale(.7); transition:opacity .3s, transform .3s; }
+.gal-cap { font-family:var(--sans); font-size:.65rem; color:rgba(255,255,255,.82); opacity:0; transform:translateY(6px); transition:opacity .3s .05s, transform .3s .05s; text-align:center; padding:0 1rem; font-weight:300; }
+.gal-item:hover .gal-zoom, .gal-item:hover .gal-cap { opacity:1; transform:none; }
+
+/* Adj projects */
+.dp-adj { display:grid; grid-template-columns:1fr 1fr; background:var(--charcoal); }
+.adj-item { position:relative; overflow:hidden; display:flex; align-items:flex-end; min-height:240px; }
+.adj-item + .adj-item { border-left:.5px solid rgba(255,255,255,.08); }
+.adj-bg { position:absolute; inset:0; opacity:.35; transition:opacity .4s, transform .5s; }
+.adj-item:hover .adj-bg { opacity:.55; transform:scale(1.04); }
+.adj-content { position:relative; z-index:1; padding:2rem 2.5rem; display:flex; flex-direction:column; gap:.35rem; }
+.adj-lbl { font-family:var(--sans); font-size:.57rem; letter-spacing:.25em; text-transform:uppercase; color:var(--accent); }
+.adj-name { font-family:var(--serif); font-size:1.3rem; font-weight:300; color:var(--warm); line-height:1.2; }
+.adj-item.next .adj-content { text-align:right; align-items:flex-end; margin-left:auto; }
+.adj-item { cursor:pointer; }
+
+/* ==============================
+   LIGHTBOX
+============================== */
+.lb { display:none; position:fixed; inset:0; z-index:300; flex-direction:column; align-items:center; justify-content:center; }
+.lb.open { display:flex; }
+.lb-bd { display:none; position:fixed; inset:0; z-index:299; background:rgba(18,16,14,.93); }
+.lb-bd.open { display:block; }
+.lb-close { position:absolute; top:1.5rem; right:2rem; background:none; border:none; color:rgba(255,255,255,.55); font-size:1.3rem; cursor:pointer; transition:color .2s; z-index:10; padding:.5rem; line-height:1; }
+.lb-close:hover { color:#fff; }
+.lb-prev, .lb-next {
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:rgba(255,255,255,.08); border:.5px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.65); width:48px; height:48px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:background .2s, color .2s; z-index:10; font-size:1.2rem;
+}
+.lb-prev:hover, .lb-next:hover { background:rgba(255,255,255,.18); color:#fff; }
+.lb-prev { left:2rem; }
+.lb-next { right:2rem; }
+.lb-stage { display:flex; flex-direction:column; align-items:center; gap:1rem; max-width:min(88vw,960px); width:100%; padding:0 5rem; }
+.lb-img-wrap { width:100%; aspect-ratio:16/10; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.lb-ph { width:100%; height:100%; }
+.lb-img { width:100%; height:100%; object-fit:contain; display:none; }
+.lb-cap-row { display:flex; justify-content:space-between; width:100%; padding:0 .25rem; }
+.lb-cap { font-family:var(--sans); font-size:.7rem; color:rgba(255,255,255,.5); font-weight:300; }
+.lb-ctr { font-family:var(--serif); font-size:.85rem; color:var(--accent); }
+.lb-thumbs { display:flex; gap:.5rem; overflow-x:auto; padding:.5rem 0; max-width:min(88vw,960px); scrollbar-width:none; }
+.lb-thumbs::-webkit-scrollbar { display:none; }
+.lb-th { width:64px; height:44px; flex-shrink:0; cursor:pointer; overflow:hidden; opacity:.4; border:1px solid transparent; transition:opacity .2s, border-color .2s; display:flex; align-items:center; justify-content:center; }
+.lb-th.active { opacity:1; border-color:var(--accent); }
+.lb-th:hover { opacity:.75; }
+
+/* ==============================
+   INSTAGRAM / SOCIAL
+============================== */
+.ig-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1.5rem; }
+.ig-follow {
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-family:var(--sans); font-size:.65rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--charcoal); border:.5px solid var(--charcoal); padding:.65rem 1.4rem;
+  transition:background var(--ease), color var(--ease);
+}
+.ig-follow:hover { background:var(--charcoal); color:var(--warm); }
+.ig-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:220px 220px; gap:.8rem; }
+.ig-item { position:relative; overflow:hidden; cursor:pointer; }
+.ig-item.tall { grid-row:span 2; }
+.ig-item.wide { grid-column:span 2; }
+.ig-ov { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(42,40,37,0); transition:background .35s; }
+.ig-ov span { font-size:1.4rem; color:var(--warm); opacity:0; transition:opacity .3s; }
+.ig-item:hover .ig-ov { background:rgba(42,40,37,.35); }
+.ig-item:hover .ig-ov span { opacity:1; }
+
+/* ==============================
+   CONTACT
+============================== */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; margin-top:4rem; }
+.contact-tagline { font-family:var(--serif); font-size:1.15rem; font-style:italic; color:var(--mid); font-weight:300; margin-top:1.5rem; line-height:1.8; }
+.contact-deets { margin-top:3rem; display:flex; flex-direction:column; gap:1.5rem; }
+.c-row { display:flex; flex-direction:column; gap:.25rem; }
+.c-lbl { font-family:var(--sans); font-size:.57rem; letter-spacing:.25em; text-transform:uppercase; color:var(--accent); }
+.c-val { font-family:var(--sans); font-size:.85rem; color:var(--charcoal); font-weight:300; }
+.c-form { display:flex; flex-direction:column; }
+.c-field { display:flex; flex-direction:column; margin-bottom:1.4rem; }
+.c-field label { font-family:var(--sans); font-size:.57rem; letter-spacing:.22em; text-transform:uppercase; color:var(--mid); margin-bottom:.5rem; }
+.c-field input, .c-field textarea, .c-field select {
+  background:transparent; border:none; border-bottom:.5px solid var(--border);
+  padding:.7rem 0; font-family:var(--sans); font-size:.85rem; color:var(--charcoal);
+  font-weight:300; outline:none; transition:border-color var(--ease);
+  border-radius:0; -webkit-appearance:none; appearance:none;
+}
+.c-field input:focus, .c-field textarea:focus, .c-field select:focus { border-color:var(--charcoal); }
+.c-field textarea { resize:none; height:80px; }
+.c-field select {
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239B8E7E'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right .5rem center; padding-right:1.5rem;
+}
+.c-note { font-family:var(--sans); font-size:.72rem; color:var(--accent); margin-top:.75rem; text-align:center; min-height:1rem; }
+
+/* ==============================
+   FOOTER & WA
+============================== */
+.footer { background:var(--charcoal); padding:4rem; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:2rem; }
+.f-logo { font-family:var(--serif); font-size:2rem; font-weight:300; color:var(--warm); letter-spacing:.15em; line-height:1; }
+.f-logo span { color:var(--accent); }
+.f-tag { font-family:var(--sans); font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-top:.5rem; }
+.f-links { display:flex; gap:2rem; }
+.f-links a { font-family:var(--sans); font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.38); transition:color var(--ease); }
+.f-links a:hover { color:var(--warm); }
+.f-copy { font-family:var(--sans); font-size:.6rem; color:rgba(255,255,255,.22); letter-spacing:.1em; }
+
+.wa-float {
+  position:fixed; bottom:2rem; right:2rem; z-index:150;
+  width:54px; height:54px; background:#25D366; color:#fff; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 16px rgba(37,211,102,.35);
+  transition:transform var(--ease), box-shadow var(--ease);
+}
+.wa-float:hover { transform:scale(1.08) translateY(-2px); box-shadow:0 6px 22px rgba(37,211,102,.45); }
+
+/* ==============================
+   FADE-UP ANIMATION
+============================== */
+.fade { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+.fade.in { opacity:1; transform:translateY(0); }
+
+/* ==============================
+   LOADING SCREEN
+============================== */
+.loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--charcoal); display: flex;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem; transition: opacity .6s ease, visibility .6s ease;
+}
+.loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-logo { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: var(--warm); letter-spacing: .2em; }
+.loader-logo span { color: var(--accent); }
+.loader-bar-wrap { width: 180px; height: .5px; background: rgba(255,255,255,.15); overflow: hidden; }
+.loader-bar { height: 100%; background: var(--accent); animation: loadbar 1.8s ease forwards; }
+@keyframes loadbar { from{width:0} to{width:100%} }
+.loader-count { font-family: var(--serif); font-size: .85rem; color: rgba(255,255,255,.35); letter-spacing: .25em; }
+
+/* ==============================
+   CUSTOM CURSOR
+============================== */
+.cursor-dot {
+  width: 8px; height: 8px; background: var(--charcoal); border-radius: 50%;
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%); transition: transform .1s;
+}
+.cursor-ring {
+  width: 36px; height: 36px; border: .5px solid var(--accent); border-radius: 50%;
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
+  transform: translate(-50%,-50%); transition: width .35s, height .35s, border-color .3s;
+  opacity: .7;
+}
+.cursor-ring.hovered { width: 52px; height: 52px; border-color: var(--charcoal); opacity: 1; }
+@media(hover:none){ .cursor-dot,.cursor-ring { display:none; } }
+body:has(.cursor-dot) { cursor: none; }
+body:has(.cursor-dot) a, body:has(.cursor-dot) button, body:has(.cursor-dot) [onclick],
+body:has(.cursor-dot) .porto-card, body:has(.cursor-dot) .svc-card { cursor: none; }
+
+/* ==============================
+   MARQUEE STRIP
+============================== */
+.marquee-strip {
+  background: var(--charcoal); padding: .75rem 0; overflow: hidden;
+  border-top: .5px solid rgba(255,255,255,.06);
+  border-bottom: .5px solid rgba(255,255,255,.06);
+}
+.marquee-track {
+  display: flex; gap: 0; white-space: nowrap;
+  animation: marqueeRun 28s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marqueeRun { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 1.2rem;
+  padding: 0 2rem;
+  font-family: var(--sans); font-size: .58rem; letter-spacing: .3em;
+  text-transform: uppercase; color: rgba(255,255,255,.35);
+}
+.marquee-dot { width: 3px; height: 3px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+
+/* ==============================
+   NOISE TEXTURE OVERLAY
+============================== */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9990; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.022; mix-blend-mode: multiply;
+}
+
+/* ==============================
+   HERO ENHANCEMENTS
+============================== */
+.hero-bg-slides {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-slide {
+  position: absolute; inset: 0; opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-slide.active { opacity: 1; }
+
+.hero-progress {
+  position: absolute; bottom: 5rem; right: 2.5rem;
+  display: flex; flex-direction: column; gap: .4rem; z-index: 2;
+}
+.hp-dot {
+  width: 1px; height: 20px; background: rgba(150,140,125,.3);
+  transition: background .3s, height .3s;
+}
+.hp-dot.active { background: var(--accent); height: 32px; }
+
+/* Typed text */
+.typed-wrap { display: inline; }
+.typed-cursor { display: inline-block; width: 2px; height: .85em; background: var(--accent); margin-left: 2px; vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* Counter animation */
+.stat-num { transition: none; }
+.stat-num.counting { opacity: 1; }
+
+/* ==============================
+   STATS COUNTER STRIP
+============================== */
+.stats-strip {
+  background: var(--cream); padding: 3rem 0;
+  border-top: .5px solid var(--border);
+  border-bottom: .5px solid var(--border);
+}
+.stats-strip .container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem; }
+.strip-stat { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
+.strip-num { font-family: var(--serif); font-size: clamp(2.5rem,4vw,3.5rem); font-weight: 300; color: var(--charcoal); line-height: 1; }
+.strip-lbl { font-family: var(--sans); font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: var(--mid); }
+
+/* ==============================
+   PROCESS SECTION
+============================== */
+.process-timeline { margin-top: 4rem; display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
+.process-timeline::before {
+  content: ''; position: absolute; top: 1.5rem; left: 12.5%; right: 12.5%;
+  height: .5px; background: var(--border);
+}
+.process-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 1.5rem; }
+.ps-circle {
+  width: 3rem; height: 3rem; border: .5px solid var(--border);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: .85rem; color: var(--accent); background: var(--warm);
+  position: relative; z-index: 1; margin-bottom: 1.5rem;
+  transition: background var(--ease), border-color var(--ease);
+}
+.process-step:hover .ps-circle { background: var(--charcoal); border-color: var(--charcoal); color: var(--warm); }
+.ps-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--charcoal); margin-bottom: .5rem; }
+.ps-desc { font-family: var(--sans); font-size: .72rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
+
+/* ==============================
+   TESTIMONIAL SECTION
+============================== */
+.testi-wrap { position: relative; overflow: hidden; margin-top: 4rem; }
+.testi-track { display: flex; transition: transform .6s cubic-bezier(.4,0,.2,1); }
+.testi-card {
+  min-width: 100%; padding: 3.5rem 4rem; background: var(--charcoal);
+  display: flex; flex-direction: column; gap: 1.5rem;
+}
+.testi-quote { font-family: var(--serif); font-size: clamp(1.3rem,2.5vw,2rem); font-weight: 300; font-style: italic; color: var(--warm); line-height: 1.5; }
+.testi-author { display: flex; flex-direction: column; gap: .2rem; }
+.testi-name { font-family: var(--sans); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--warm); font-weight: 300; }
+.testi-proj { font-family: var(--sans); font-size: .65rem; color: var(--accent); }
+.testi-nav { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem; }
+.testi-btn {
+  width: 42px; height: 42px; border: .5px solid var(--border);
+  background: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--mid); font-size: 1rem; transition: all var(--ease);
+}
+.testi-btn:hover { background: var(--charcoal); border-color: var(--charcoal); color: var(--warm); }
+.testi-dots { display: flex; gap: .5rem; align-items: center; }
+.testi-dt { width: 20px; height: .5px; background: var(--border); cursor: pointer; transition: background .3s, width .3s; }
+.testi-dt.active { background: var(--charcoal); width: 36px; }
+
+/* ==============================
+   SCROLL PROGRESS BAR
+============================== */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 9999;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  width: 0%; transition: width .1s linear;
+}
+
+/* ==============================
+   PARALLAX HERO TEXT
+============================== */
+.hero-left { will-change: transform; }
+
+/* ==============================
+   BACK TO TOP
+============================== */
+.btt {
+  position: fixed; bottom: 5.5rem; right: 2rem; z-index: 150;
+  width: 42px; height: 42px; background: var(--warm); border: .5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--mid); font-size: .9rem; cursor: pointer;
+  opacity: 0; pointer-events: none; transition: all var(--ease);
+}
+.btt.show { opacity: 1; pointer-events: all; }
+.btt:hover { background: var(--charcoal); color: var(--warm); border-color: var(--charcoal); }
+
+/* ==============================
+   PROCESS & TESTIMONIAL RESPONSIVE
+============================== */
+@media(max-width:1024px){
+  .process-timeline { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .process-timeline::before { display: none; }
+  .testi-card { padding: 2.5rem; }
+}
+@media(max-width:768px){
+  .process-timeline { grid-template-columns: 1fr; gap: 2rem; }
+  .process-step { text-align: left; flex-direction: row; align-items: flex-start; gap: 1.5rem; }
+  .ps-circle { flex-shrink: 0; }
+  .testi-card { padding: 2rem 1.5rem; }
+  .stats-strip .container { justify-content: center; gap: 2.5rem; }
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media(max-width:1024px){
+  .container { padding:0 2.5rem; }
+  .nav { padding:1.2rem 2.5rem; }
+  .nav.scrolled { padding:.8rem 2.5rem; }
+  .hero { grid-template-columns:1fr; }
+  .hero-left { padding:5rem 2.5rem 3rem; order:2; }
+  .hero-right { order:1; min-height:55vw; }
+  .hero-bg { min-height:55vw; }
+  .about-grid { grid-template-columns:1fr; gap:3rem; }
+  .svc-grid { grid-template-columns:1fr; }
+  .svc-card { border-right:none; border-bottom:.5px solid var(--border); }
+  .svc-card:last-child { border-bottom:none; }
+  .porto-grid { columns:2; }
+  .contact-grid { grid-template-columns:1fr; gap:3rem; }
+  .footer { flex-direction:column; align-items:flex-start; }
+  .ig-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:160px 160px 160px; }
+  .ig-item.tall { grid-row:span 1; }
+  .dp-info { grid-template-columns:1fr; gap:3rem; }
+  .dp-hero-overlay { padding:2.5rem; }
+  .gal-grid { grid-template-columns:repeat(2,1fr); }
+  .gal-item:first-child { grid-column:span 2; }
+  .dp-adj { grid-template-columns:1fr; }
+  .adj-item+.adj-item { border-left:none; border-top:.5px solid rgba(255,255,255,.08); }
+}
+@media(max-width:768px){
+  .sec-pad { padding:4rem 0; }
+  .container { padding:0 1.5rem; }
+  .nav { padding:1.2rem 1.5rem; }
+  .nav-links, .nav-cta { display:none; }
+  .burger { display:flex; }
+  .hero-left { padding:4rem 1.5rem 2.5rem; }
+  .hero-stats { left:1.5rem; bottom:1.5rem; gap:1.5rem; }
+  .porto-grid { columns:1; }
+  .footer { padding:3rem 1.5rem; }
+  .f-links { flex-wrap:wrap; gap:1.2rem; }
+  .wa-float { bottom:1.2rem; right:1.2rem; width:48px; height:48px; }
+  .lb-prev { left:.5rem; }
+  .lb-next { right:.5rem; }
+  .lb-stage { padding:0 3rem; }
+  .dp-nav { padding:1rem 1.5rem; }
+  .dp-adj { min-height:auto; }
+  .adj-item { min-height:160px; }
+  .gal-grid { grid-template-columns:1fr; }
+  .gal-item:first-child { grid-column:span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- LOADING SCREEN -->
+<div class="loader" id="loader">
+  <div class="loader-logo">S<span>|</span>P</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-count" id="loaderCount">0%</div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- BACK TO TOP -->
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- ==============================
+     NAV
+============================== -->
+<nav class="nav" id="mainNav">
+  <div class="nav-logo">
+    <div class="logo-mark">S<span class="div">|</span>P</div>
+    <span class="logo-text">Studio Patio</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Konsultasi Gratis</a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <ul>
+    <li><a href="#about" class="mob-link">About</a></li>
+    <li><a href="#services" class="mob-link">Services</a></li>
+    <li><a href="#portfolio" class="mob-link">Portfolio</a></li>
+    <li><a href="#contact" class="mob-link">Contact</a></li>
+  </ul>
+  <a href="#contact" class="btn-primary mob-link">Konsultasi Gratis</a>
+</div>
+
+<!-- ==============================
+     HERO
+============================== -->
+<section class="hero" id="home">
+  <div class="hero-left fade">
+    <p class="eyebrow">Interior Design Studio — Batam</p>
+    <h1 class="hero-title">Ruang yang<br><em class="typed-wrap" id="typedText"></em><span class="typed-cursor"></span><br>tentang Anda</h1>
+    <p class="hero-desc">Studio Patio menghadirkan desain interior yang melampaui estetika — sebuah ruang yang mencerminkan kepribadian, kehangatan, dan cara hidup Anda.</p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">Lihat Portfolio</a>
+      <a href="#services" class="btn-ghost">Layanan Kami <span>→</span></a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg">
+      <div class="hero-bg-slides" id="heroSlides">
+        <div class="hero-slide active" style="background:linear-gradient(135deg,#E8E4DC,#D4CFC4 50%,#C8C2B5)"></div>
+        <div class="hero-slide" style="background:linear-gradient(160deg,#DDD8CE,#C8C3B7 40%,#B5AFA3)"></div>
+        <div class="hero-slide" style="background:linear-gradient(135deg,#3F3C38,#2E2B27)"></div>
+      </div>
+      <span class="hero-bg-label">Featured Project</span>
+      <div class="hero-progress" id="heroProgress">
+        <div class="hp-dot active"></div>
+        <div class="hp-dot"></div>
+        <div class="hp-dot"></div>
+      </div>
+    </div>
+    <div class="hero-stats fade">
+      <div class="stat"><div class="stat-num" data-target="120">0</div><div class="stat-lbl">Proyek Selesai</div></div>
+      <div class="stat"><div class="stat-num" data-target="8">0</div><div class="stat-lbl">Tahun Pengalaman</div></div>
+      <div class="stat"><div class="stat-num" data-target="98">0</div><div class="stat-lbl">Kepuasan Klien</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Interior Design<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Residential<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Commercial<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Hospitality<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Batam · Kepri<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Desain Bermakna<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Studio Patio<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Since 2017<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Interior Design<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Residential<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Commercial<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Hospitality<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Batam · Kepri<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Desain Bermakna<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Studio Patio<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Since 2017<span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- ==============================
+     ABOUT
+============================== -->
+<section class="bg-cream sec-pad" id="about">
+  <div class="container">
+    <p class="eyebrow fade">Tentang Kami</p>
+    <h2 class="sec-title fade">Desain adalah<br><em>seni mendengarkan</em></h2>
+    <div class="about-grid">
+      <div class="about-img fade"><span class="img-lbl">Studio Patio</span></div>
+      <div class="fade">
+        <p class="body-text">Studio Patio lahir dari keyakinan bahwa setiap ruang punya potensi untuk menjadi karya. Kami adalah tim desainer yang bekerja dengan teliti — memadukan fungsi, material, dan narasi visual menjadi satu harmoni yang utuh.</p>
+        <p class="body-text" style="margin-top:1rem">Berlokasi di Batam, kami telah menangani proyek residensial, komersial, dan hospitality dengan pendekatan yang personal dan terukur.</p>
+        <div class="values">
+          <div class="val-item"><span class="val-num">01</span><div class="val-body"><strong>Pendekatan Personal</strong><p>Setiap proyek dimulai dengan memahami klien, bukan tren.</p></div></div>
+          <div class="val-item"><span class="val-num">02</span><div class="val-body"><strong>Material Terpilih</strong><p>Kami bekerja dengan material yang tahan lama dan bermakna.</p></div></div>
+          <div class="val-item"><span class="val-num">03</span><div class="val-body"><strong>Eksekusi Presisi</strong><p>Dari konsep hingga selesai, tanpa kompromi pada kualitas.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     SERVICES
+============================== -->
+<section class="bg-white sec-pad" id="services">
+  <div class="container">
+    <p class="eyebrow fade">Layanan Kami</p>
+    <h2 class="sec-title fade">Apa yang<br>kami <em>tawarkan</em></h2>
+    <div class="svc-grid fade">
+      <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Desain Residensial</div><p class="svc-desc">Hunian pribadi yang mencerminkan karakter Anda — dari studio apartment hingga rumah mewah. Konsultasi penuh dari konsep hingga eksekusi.</p><span class="svc-arrow">→</span></div>
+      <div class="svc-card"><div class="svc-num">02</div><div class="svc-name">Desain Komersial</div><p class="svc-desc">Ruang kerja, retail, dan bisnis yang meningkatkan produktivitas dan membangun identitas brand Anda secara visual.</p><span class="svc-arrow">→</span></div>
+      <div class="svc-card"><div class="svc-num">03</div><div class="svc-name">Desain Hospitality</div><p class="svc-desc">Kafe, hotel, dan restoran dengan atmosfer yang tak terlupakan — merancang pengalaman bagi setiap tamu yang datang.</p><span class="svc-arrow">→</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     STATS STRIP
+============================== -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="strip-stat fade"><div class="strip-num" data-target="120" data-suffix="+">0</div><div class="strip-lbl">Proyek Selesai</div></div>
+    <div class="strip-stat fade"><div class="strip-num" data-target="8" data-suffix="">0</div><div class="strip-lbl">Tahun Pengalaman</div></div>
+    <div class="strip-stat fade"><div class="strip-num" data-target="98" data-suffix="%">0</div><div class="strip-lbl">Kepuasan Klien</div></div>
+    <div class="strip-stat fade"><div class="strip-num" data-target="3" data-suffix="">0</div><div class="strip-lbl">Kategori Layanan</div></div>
+    <div class="strip-stat fade"><div class="strip-num" data-target="15" data-suffix="+">0</div><div class="strip-lbl">Tim Profesional</div></div>
+  </div>
+</div>
+
+<!-- ==============================
+     PROCESS
+============================== -->
+<section class="bg-white sec-pad" id="process">
+  <div class="container">
+    <p class="eyebrow fade">Cara Kerja Kami</p>
+    <h2 class="sec-title fade">Proses yang <em>terstruktur</em></h2>
+    <div class="process-timeline">
+      <div class="process-step fade">
+        <div class="ps-circle">01</div>
+        <div><div class="ps-title">Konsultasi</div><p class="ps-desc">Mendengarkan cerita dan kebutuhan Anda, memahami visi dan anggaran proyek.</p></div>
+      </div>
+      <div class="process-step fade">
+        <div class="ps-circle">02</div>
+        <div><div class="ps-title">Konsep & Desain</div><p class="ps-desc">Mengembangkan moodboard, layout, dan presentasi desain 3D yang detail.</p></div>
+      </div>
+      <div class="process-step fade">
+        <div class="ps-circle">03</div>
+        <div><div class="ps-title">Eksekusi</div><p class="ps-desc">Pengawasan penuh proses konstruksi dan pemasangan oleh tim ahli kami.</p></div>
+      </div>
+      <div class="process-step fade">
+        <div class="ps-circle">04</div>
+        <div><div class="ps-title">Serah Terima</div><p class="ps-desc">Finishing sentuhan akhir dan penyerahan ruang yang siap dihuni.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     TESTIMONIALS
+============================== -->
+<section class="bg-cream sec-pad" id="testimonials">
+  <div class="container">
+    <p class="eyebrow fade">Kata Klien</p>
+    <h2 class="sec-title fade">Cerita <em>mereka</em></h2>
+    <div class="testi-wrap fade" style="margin-top:2.5rem">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <p class="testi-quote">"Studio Patio mengubah rumah kami menjadi tempat yang benar-benar mencerminkan karakter keluarga kami. Prosesnya sangat menyenangkan dan hasilnya melampaui ekspektasi."</p>
+          <div class="testi-author"><span class="testi-name">Keluarga Santoso</span><span class="testi-proj">Riverside Residence · Batam, 2024</span></div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Kantor kami kini bukan hanya tempat bekerja — ini adalah ruang yang menginspirasi tim kami setiap hari. Studio Patio benar-benar memahami identitas brand kami."</p>
+          <div class="testi-author"><span class="testi-name">PT Aria Nusantara</span><span class="testi-proj">Aria Office · Kepri Mall, 2024</span></div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Setiap sudut hotel kami dirancang dengan ketelitian luar biasa. Tamu kami selalu memuji atmosfer yang tenang dan mewah. Rekomendasi penuh untuk Studio Patio."</p>
+          <div class="testi-author"><span class="testi-name">Serenity Hospitality Group</span><span class="testi-proj">Serenity Suite Hotel · Nagoya, 2024</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem" class="fade">
+      <div class="testi-dots" id="testiDots">
+        <div class="testi-dt active" onclick="goTesti(0)"></div>
+        <div class="testi-dt" onclick="goTesti(1)"></div>
+        <div class="testi-dt" onclick="goTesti(2)"></div>
+      </div>
+      <div class="testi-nav">
+        <button class="testi-btn" id="testiPrev">‹</button>
+        <button class="testi-btn" id="testiNext">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     PORTFOLIO
+============================== -->
+<section class="bg-dark sec-pad" id="portfolio">
+  <div class="container">
+    <p class="eyebrow fade" style="color:var(--accent)">Portfolio</p>
+    <h2 class="sec-title light fade">Karya-karya<br><em>pilihan kami</em></h2>
+    <div class="porto-filter fade">
+      <button class="pf-btn active" data-f="all">Semua</button>
+      <button class="pf-btn" data-f="residensial">Residensial</button>
+      <button class="pf-btn" data-f="komersial">Komersial</button>
+      <button class="pf-btn" data-f="hospitality">Hospitality</button>
+    </div>
+    <div class="porto-grid" id="portoGrid">
+      <!-- cards injected by JS -->
+    </div>
+    <div style="text-align:center;margin-top:3rem" class="fade">
+      <a href="#" class="btn-outline" onclick="return false">Lihat Semua Proyek</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section style="background:var(--charcoal);padding:5rem 0;overflow:hidden;position:relative">
+  <div style="position:absolute;inset:0;background:url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h1v40H0z' fill='rgba(155,142,126,.07)'/%3E%3Cpath d='M0 0v1h40V0z' fill='rgba(155,142,126,.07)'/%3E%3C/svg%3E\");opacity:.6"></div>
+  <div class="container" style="position:relative;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem">
+    <div>
+      <p class="eyebrow" style="color:var(--accent)">Siap Memulai?</p>
+      <h2 class="sec-title light" style="max-width:480px">Wujudkan ruang impian<br>Anda <em>bersama kami</em></h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1rem;align-items:flex-start">
+      <a href="#contact" class="btn-outline">Konsultasi Gratis</a>
+      <span style="font-family:var(--sans);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3)">Respon dalam 24 jam</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     INSTAGRAM
+============================== -->
+<section class="bg-cream sec-pad" id="instagram">
+  <div class="container">
+    <div class="ig-header fade">
+      <div>
+        <p class="eyebrow">Instagram</p>
+        <h2 class="sec-title">Ikuti kami di<br><em>@studiopatio.id</em></h2>
+      </div>
+      <a href="https://instagram.com/studiopatio.id" target="_blank" rel="noopener" class="ig-follow">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        Follow
+      </a>
+    </div>
+    <div class="ig-grid fade">
+      <div class="ig-item tall" style="background:linear-gradient(160deg,#E2DDD5,#C8C2B5)"><div class="ig-ov"><span>↗</span></div></div>
+      <div class="ig-item" style="background:linear-gradient(135deg,#D5D0C8,#C2BDB6)"><div class="ig-ov"><span>↗</span></div></div>
+      <div class="ig-item" style="background:linear-gradient(135deg,#3A3733,#2A2825)"><div class="ig-ov"><span>↗</span></div></div>
+      <div class="ig-item" style="background:linear-gradient(135deg,#44403B,#32302C)"><div class="ig-ov"><span>↗</span></div></div>
+      <div class="ig-item wide" style="background:linear-gradient(135deg,#CAC5BC,#B8B3AA)"><div class="ig-ov"><span>↗</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     CONTACT
+============================== -->
+<section class="bg-white sec-pad" id="contact">
+  <div class="container">
+    <p class="eyebrow fade">Hubungi Kami</p>
+    <h2 class="sec-title fade">Mari mulai<br><em>percakapan</em></h2>
+    <div class="contact-grid">
+      <div class="fade">
+        <p class="contact-tagline">"Setiap ruang terbaik dimulai dari sebuah cerita. Ceritakan milik Anda kepada kami."</p>
+        <div class="contact-deets">
+          <div class="c-row"><span class="c-lbl">Studio</span><span class="c-val">Batam, Kepulauan Riau</span></div>
+          <div class="c-row"><span class="c-lbl">Email</span><span class="c-val">hello@studiopatio.id</span></div>
+          <div class="c-row"><span class="c-lbl">WhatsApp</span><span class="c-val">+62 812 0000 0000</span></div>
+          <div class="c-row"><span class="c-lbl">Instagram</span><span class="c-val">@studiopatio.id</span></div>
+        </div>
+      </div>
+      <form class="c-form fade" onsubmit="submitForm(event)">
+        <div class="c-field"><label for="fname">Nama Lengkap</label><input type="text" id="fname" placeholder="Nama Anda" required></div>
+        <div class="c-field"><label for="femail">Email</label><input type="email" id="femail" placeholder="email@domain.com" required></div>
+        <div class="c-field">
+          <label for="ftype">Jenis Proyek</label>
+          <select id="ftype">
+            <option value="">Pilih tipe proyek...</option>
+            <option>Desain Residensial</option>
+            <option>Desain Komersial</option>
+            <option>Desain Hospitality</option>
+            <option>Konsultasi</option>
+          </select>
+        </div>
+        <div class="c-field"><label for="fmsg">Pesan</label><textarea id="fmsg" placeholder="Ceritakan tentang ruang dan visi Anda..."></textarea></div>
+        <button type="submit" class="btn-primary" style="width:100%;text-align:center">Kirim Pesan</button>
+        <p class="c-note" id="cNote"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     FOOTER
+============================== -->
+<footer class="footer">
+  <div>
+    <div class="f-logo">S<span>|</span>P</div>
+    <p class="f-tag">Studio Patio · Interior Design</p>
+  </div>
+  <ul class="f-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="f-copy">© 2025 Studio Patio. All rights reserved.</p>
+</footer>
+
+<!-- WA Float -->
+<a href="https://wa.me/628120000000?text=Halo%20Studio%20Patio%2C%20saya%20ingin%20berkonsultasi." class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.553 4.112 1.523 5.843L.044 23.338a.5.5 0 0 0 .618.618l5.495-1.479A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.956 9.956 0 0 1-5.189-1.451l-.371-.221-3.853 1.037 1.037-3.741-.241-.386A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+
+<!-- ==============================
+     PROJECT DETAIL PANEL
+============================== -->
+<div class="detail-panel" id="detailPanel">
+  <div class="dp-nav">
+    <button class="dp-back" id="dpBack">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+      Kembali ke Portfolio
+    </button>
+    <div class="dp-nav-logo">S<span>|</span>P</div>
+  </div>
+
+  <div class="dp-hero" id="dpHero">
+    <div class="dp-hero-bg" id="dpHeroBg"></div>
+    <div class="dp-hero-overlay">
+      <div>
+        <span class="dp-cat" id="dpCat"></span>
+        <h2 class="dp-title" id="dpTitle"></h2>
+        <p class="dp-loc" id="dpLoc"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-cream">
+    <div class="container">
+      <div class="dp-info">
+        <div>
+          <h3 class="dp-desc-title" id="dpDescTitle"></h3>
+          <p class="body-text" id="dpBody1" style="margin-top:1rem"></p>
+          <p class="body-text" id="dpBody2" style="margin-top:.8rem"></p>
+        </div>
+        <div class="dp-meta" id="dpMeta"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dp-gallery bg-white">
+    <div class="container" style="padding-top:4rem;padding-bottom:1rem">
+      <p class="eyebrow">Galeri Foto</p>
+      <h3 class="sec-title">Dokumentasi <em>Proyek</em></h3>
+      <div class="gal-grid" id="dpGalGrid"></div>
+    </div>
+  </div>
+
+  <div class="dp-adj" id="dpAdj"></div>
+
+  <div class="bg-cream sec-pad">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem">
+      <div>
+        <p class="eyebrow">Tertarik?</p>
+        <h3 class="sec-title">Wujudkan ruang<br><em>impian Anda</em></h3>
+      </div>
+      <a href="#contact" class="btn-primary" onclick="closeDetail()">Mulai Konsultasi</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div><div class="f-logo">S<span>|</span>P</div><p class="f-tag">Studio Patio · Interior Design</p></div>
+    <ul class="f-links">
+      <li><a href="#about" onclick="closeDetail()">About</a></li>
+      <li><a href="#services" onclick="closeDetail()">Services</a></li>
+      <li><a href="#portfolio" onclick="closeDetail()">Portfolio</a></li>
+      <li><a href="#contact" onclick="closeDetail()">Contact</a></li>
+    </ul>
+    <p class="f-copy">© 2025 Studio Patio. All rights reserved.</p>
+  </footer>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb-bd" id="lbBd"></div>
+<div class="lb" id="lb" tabindex="-1">
+  <button class="lb-close" id="lbClose">✕</button>
+  <button class="lb-prev" id="lbPrev">‹</button>
+  <button class="lb-next" id="lbNext">›</button>
+  <div class="lb-stage">
+    <div class="lb-img-wrap">
+      <div class="lb-ph" id="lbPh"></div>
+      <img class="lb-img" id="lbImg" src="" alt="" />
+    </div>
+    <div class="lb-cap-row">
+      <span class="lb-cap" id="lbCap"></span>
+      <span class="lb-ctr" id="lbCtr"></span>
+    </div>
+  </div>
+  <div class="lb-thumbs" id="lbThumbs"></div>
+</div>
+
+<script>
+// ==============================
+//  LOADER
+// ==============================
+const loader = document.getElementById('loader');
+const loaderCount = document.getElementById('loaderCount');
+let count = 0;
+const countInterval = setInterval(() => {
+  count += Math.floor(Math.random() * 12) + 3;
+  if (count >= 100) { count = 100; clearInterval(countInterval); }
+  loaderCount.textContent = count + '%';
+}, 80);
+window.addEventListener('load', () => {
+  setTimeout(() => loader.classList.add('done'), 1800);
+});
+
+// ==============================
+//  SCROLL PROGRESS BAR
+// ==============================
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const pct = (scrollY / (document.body.scrollHeight - innerHeight)) * 100;
+  scrollProgress.style.width = pct + '%';
+}, { passive: true });
+
+// ==============================
+//  CUSTOM CURSOR
+// ==============================
+const dot  = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; });
+function lerp(a,b,t){ return a+(b-a)*t; }
+function animCursor(){
+  rx = lerp(rx, mx, 0.12); ry = lerp(ry, my, 0.12);
+  ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+document.querySelectorAll('a,button,[onclick],.porto-card,.svc-card,.gal-item,.ig-item').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+});
+
+// ==============================
+//  BACK TO TOP
+// ==============================
+const btt = document.getElementById('btt');
+window.addEventListener('scroll', () => btt.classList.toggle('show', scrollY > 600), { passive: true });
+
+// ==============================
+//  HERO SLIDESHOW
+// ==============================
+const slides = document.querySelectorAll('.hero-slide');
+const hpDots = document.querySelectorAll('.hp-dot');
+let slideIdx = 0;
+setInterval(() => {
+  slides[slideIdx].classList.remove('active');
+  hpDots[slideIdx].classList.remove('active');
+  slideIdx = (slideIdx + 1) % slides.length;
+  slides[slideIdx].classList.add('active');
+  hpDots[slideIdx].classList.add('active');
+}, 4000);
+
+// ==============================
+//  TYPED TEXT
+// ==============================
+const words = ['Bercerita', 'Menginspirasi', 'Berbicara', 'Bermakna'];
+const typedEl = document.getElementById('typedText');
+let wIdx = 0, cIdx = 0, deleting = false;
+function typeLoop() {
+  const word = words[wIdx];
+  if (!deleting) {
+    typedEl.textContent = word.slice(0, ++cIdx);
+    if (cIdx === word.length) { deleting = true; setTimeout(typeLoop, 2200); return; }
+    setTimeout(typeLoop, 90);
+  } else {
+    typedEl.textContent = word.slice(0, --cIdx);
+    if (cIdx === 0) { deleting = false; wIdx = (wIdx+1) % words.length; setTimeout(typeLoop, 350); return; }
+    setTimeout(typeLoop, 45);
+  }
+}
+setTimeout(typeLoop, 2200);
+
+// ==============================
+//  COUNTER ANIMATION
+// ==============================
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start = performance.now();
+  function step(ts) {
+    const p = Math.min((ts - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(eased * target) + (p === 1 ? suffix : '');
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.target.dataset.target) {
+      animateCounter(e.target);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+
+// ==============================
+//  TESTIMONIAL SLIDER
+// ==============================
+const testiTrack = document.getElementById('testiTrack');
+const testiDots  = document.querySelectorAll('.testi-dt');
+let testiIdx = 0, testiTotal = 3;
+function goTesti(i) {
+  testiIdx = i;
+  testiTrack.style.transform = `translateX(-${i * 100}%)`;
+  testiDots.forEach((d,j) => d.classList.toggle('active', j === i));
+}
+document.getElementById('testiNext').addEventListener('click', () => goTesti((testiIdx+1)%testiTotal));
+document.getElementById('testiPrev').addEventListener('click', () => goTesti((testiIdx-1+testiTotal)%testiTotal));
+setInterval(() => goTesti((testiIdx+1)%testiTotal), 6000);
+
+// ==============================
+//  DATA
+// ==============================
+const PROJECTS = [
+  { id:'riverside-residence', title:'Riverside Residence', category:'Residensial', cat:'residensial', location:'Batam', year:'2024', client:'Keluarga Santoso', size:'320 m²', duration:'5 bulan', bg:'linear-gradient(160deg,#D9D4C9,#B8B2A5)', descTitle:'Ketenangan di tepi sungai', body1:'Riverside Residence dirancang untuk mencerminkan ketenangan alam sekitarnya. Dengan view langsung ke sungai, kami memaksimalkan bukaan dan menghadirkan material alami — kayu jati, batu alam, dan rotan — yang berdialog harmonis dengan lanskap luar.', body2:'Pendekatan open-plan pada ruang utama memungkinkan aliran udara dan cahaya alami yang optimal, sementara palet warna netral warm menciptakan suasana yang hangat namun tidak berlebihan.',
+    gallery:[{bg:'linear-gradient(135deg,#D9D4C9,#C5BEB1)',cap:'Ruang Keluarga — Natural light & warm tones',dark:true},{bg:'linear-gradient(160deg,#D0CBC0,#BCBAB0)',cap:'Dapur & Ruang Makan — Open plan concept',dark:true},{bg:'linear-gradient(135deg,#C8C3B7,#B5AFA2)',cap:'Master Bedroom — Riverside view',dark:true},{bg:'linear-gradient(160deg,#BEB9AD,#ABA5A0)',cap:'Kamar Mandi — Stone & timber finish',dark:true},{bg:'linear-gradient(135deg,#D5D0C8,#C2BDB6)',cap:'Teras Belakang — Outdoor living',dark:true},{bg:'linear-gradient(160deg,#CCCAB0,#B8B2A5)',cap:'Foyer — Statement entryway',dark:true}]},
+  { id:'the-loft-apartment', title:'The Loft Apartment', category:'Residensial', cat:'residensial', location:'Nagoya Hill, Batam', year:'2024', client:'Privat', size:'85 m²', duration:'3 bulan', bg:'linear-gradient(160deg,#CDC7BB,#B8B2A5)', descTitle:'Urban loft dengan jiwa yang hangat', body1:'Tantangan utama proyek ini adalah mengubah unit berplafon tinggi menjadi hunian yang personal dan hangat. Kami memilih pendekatan "warm industrial" — mempertahankan exposed concrete, namun membalansnya dengan furnitur kayu, kain tekstur, dan tanaman hijau.', body2:'Mezzanine level didesain sebagai area kerja privat yang tersembunyi namun tetap terhubung dengan ruang utama di bawah.',
+    gallery:[{bg:'linear-gradient(135deg,#CDC7BB,#B8B4A8)',cap:'Living Area — Double volume space',dark:true},{bg:'linear-gradient(160deg,#C4BEB4,#B0AAA0)',cap:'Mezzanine — Private workspace',dark:true},{bg:'linear-gradient(135deg,#BCBAB0,#ABA79E)',cap:'Dapur — Compact & functional',dark:true},{bg:'linear-gradient(160deg,#C8C3B8,#B5B0A8)',cap:'Bedroom — Cozy retreat',dark:true},{bg:'linear-gradient(135deg,#D0CBC0,#BCBAB0)',cap:'Detail Material',dark:true}]},
+  { id:'palm-villa', title:'Palm Villa', category:'Residensial', cat:'residensial', location:'Batam Center', year:'2023', client:'Keluarga Halim', size:'450 m²', duration:'7 bulan', bg:'linear-gradient(135deg,#C8C3B7,#B5AFA2)', descTitle:'Villa tropis yang elegan', body1:'Palm Villa mengintegrasikan arsitektur tropis kontemporer dengan interior yang mewah namun membumi. Kolam renang private, taman tropis, dan ruang semi-outdoor menjadi elemen kunci.', body2:'Material lokal seperti batu Palimanan dan kayu ulin dipadukan dengan sentuhan modern untuk menciptakan identitas yang khas dan berkelanjutan.',
+    gallery:[{bg:'linear-gradient(135deg,#C8C3B7,#B8B3A7)',cap:'Living Room — Tropical luxury',dark:true},{bg:'linear-gradient(160deg,#BEB9AD,#ADAAA0)',cap:'Pool Area',dark:true},{bg:'linear-gradient(135deg,#D0CCC0,#BCBAB0)',cap:'Master Suite',dark:true},{bg:'linear-gradient(160deg,#C5C0B5,#B2AEA5)',cap:'Dining Room',dark:true},{bg:'linear-gradient(135deg,#BCBAB0,#ADAAA2)',cap:'Garden Terrace',dark:true},{bg:'linear-gradient(160deg,#CAC5BC,#B8B4AA)',cap:'Kamar Mandi',dark:true}]},
+  { id:'aria-office', title:'Aria Office', category:'Komersial', cat:'komersial', location:'Kepri Mall, Batam', year:'2024', client:'PT Aria Nusantara', size:'600 m²', duration:'4 bulan', bg:'linear-gradient(135deg,#3F3C38,#2E2B27)', descTitle:'Kantor yang menginspirasi produktivitas', body1:'Aria Office dirancang ulang dari ruang kosong menjadi kantor modern yang mencerminkan identitas brand PT Aria Nusantara. Layout open-office yang fleksibel dikombinasikan dengan quiet rooms dan collaboration zones.', body2:'Palet gelap dengan aksen brass dan tanaman hijau menciptakan suasana premium yang tetap nyaman untuk aktivitas harian.',
+    gallery:[{bg:'linear-gradient(135deg,#3F3C38,#2E2B27)',cap:'Main Office Floor',dark:false},{bg:'linear-gradient(160deg,#4A4540,#38342F)',cap:'Ruang Meeting',dark:false},{bg:'linear-gradient(135deg,#44403B,#322E2A)',cap:'Reception Area',dark:false},{bg:'linear-gradient(160deg,#3A3733,#2A2825)',cap:'Breakout Area',dark:false},{bg:'linear-gradient(135deg,#35312C,#28241F)',cap:'Quiet Room',dark:false}]},
+  { id:'vertex-creative-studio', title:'Vertex Creative Studio', category:'Komersial', cat:'komersial', location:'Batam', year:'2023', client:'Vertex Agency', size:'180 m²', duration:'2.5 bulan', bg:'linear-gradient(135deg,#4A4540,#38342F)', descTitle:'Ruang kreatif yang memicu ide', body1:'Studio kreatif ini dirancang untuk mencerminkan energi Vertex Agency — dinamis, berani, dan selalu bergerak. Zoning yang jelas antara area produksi, presentasi klien, dan relaksasi tim menjadi fondasi desain.', body2:'Elemen grafis dan mural custom memperkuat identitas brand di setiap sudut ruangan.',
+    gallery:[{bg:'linear-gradient(135deg,#4A4540,#38342F)',cap:'Studio Floor',dark:false},{bg:'linear-gradient(160deg,#44403B,#322E2A)',cap:'Client Presentation Room',dark:false},{bg:'linear-gradient(135deg,#3F3C38,#2E2B27)',cap:'Mural Wall',dark:false},{bg:'linear-gradient(160deg,#38342F,#28241F)',cap:'Chill Zone',dark:false}]},
+  { id:'bloom-boutique', title:'Bloom Boutique', category:'Komersial', cat:'komersial', location:'Harbor Bay, Batam', year:'2023', client:'Bloom Fashion', size:'95 m²', duration:'2 bulan', bg:'linear-gradient(135deg,#44403B,#322E2A)', descTitle:'Retail yang menjual pengalaman', body1:'Bloom Boutique membutuhkan ruang yang tidak hanya menjual produk, tetapi menjual perasaan. Pencahayaan dramatis, fitting room seperti dressing room pribadi, dan display area storytelling.', body2:'Palet warm neutral dengan aksen terracotta dan brass menciptakan suasana feminin, modern, dan aspirasional.',
+    gallery:[{bg:'linear-gradient(135deg,#44403B,#322E2A)',cap:'Main Floor',dark:false},{bg:'linear-gradient(160deg,#3F3C38,#2E2B27)',cap:'Fitting Room',dark:false},{bg:'linear-gradient(135deg,#4A4540,#38342F)',cap:'Window Display',dark:false},{bg:'linear-gradient(160deg,#35312C,#26231F)',cap:'Cashier Area',dark:false}]},
+  { id:'serenity-suite-hotel', title:'Serenity Suite Hotel', category:'Hospitality', cat:'hospitality', location:'Nagoya, Batam', year:'2024', client:'Serenity Hospitality Group', size:'1.200 m²', duration:'8 bulan', bg:'linear-gradient(160deg,#35312C,#28241F)', descTitle:'Ketenangan dalam setiap sudut', body1:'Proyek hospitality terbesar kami — mencakup lobby utama, 48 kamar, restoran, dan fasilitas spa. Konsep keseluruhan berpusat pada "quiet luxury": kemewahan yang tidak perlu berteriak.', body2:'Material gelap, pencahayaan hangat, dan tekstur yang kaya menciptakan atmosfer yang langsung membuat tamu merasa meninggalkan dunia sehari-hari.',
+    gallery:[{bg:'linear-gradient(160deg,#35312C,#28241F)',cap:'Grand Lobby',dark:false},{bg:'linear-gradient(135deg,#3A3530,#2A2520)',cap:'Deluxe Suite',dark:false},{bg:'linear-gradient(160deg,#302C28,#221F1B)',cap:'Suite Bathroom',dark:false},{bg:'linear-gradient(135deg,#38342F,#28241F)',cap:'Restaurant',dark:false},{bg:'linear-gradient(160deg,#2E2B27,#201D1A)',cap:'Spa',dark:false},{bg:'linear-gradient(135deg,#3F3C38,#302D2A)',cap:'Corridor Detail',dark:false}]},
+  { id:'kopi-co', title:'Kopi & Co', category:'Hospitality', cat:'hospitality', location:'Batam Center', year:'2024', client:'Kopi & Co F&B Group', size:'160 m²', duration:'3 bulan', bg:'linear-gradient(135deg,#4D4843,#3A3530)', descTitle:'Kafe yang terasa seperti rumah kedua', body1:'Konsep "third place" — bukan kantor, bukan rumah. Ruang dibagi menjadi beberapa zona: bar area energik, corner tenang untuk kerja, dan sofa zone untuk ngobrol santai.', body2:'Material kayu reclaimed, bata ekspos, dan tanaman hijau melimpah menciptakan suasana organik dan autentik.',
+    gallery:[{bg:'linear-gradient(135deg,#4D4843,#3A3530)',cap:'Main Seating Area',dark:false},{bg:'linear-gradient(160deg,#44403B,#32302C)',cap:'Coffee Bar',dark:false},{bg:'linear-gradient(135deg,#3F3C38,#2E2B27)',cap:'Work Corner',dark:false},{bg:'linear-gradient(160deg,#4A4540,#38342F)',cap:'Sofa Zone',dark:false},{bg:'linear-gradient(135deg,#38342F,#28241F)',cap:'Facade',dark:false}]},
+  { id:'terra-restaurant', title:'Terra Restaurant', category:'Hospitality', cat:'hospitality', location:'Nongsa, Batam', year:'2023', client:'Terra F&B', size:'240 m²', duration:'3.5 bulan', bg:'linear-gradient(135deg,#3A3530,#2A2520)', descTitle:'Makan malam yang tak terlupakan', body1:'Berlokasi di tepi pantai Nongsa. Hampir semua kursi menghadap ke laut dan dinding kaca besar memaksimalkan pemandangan saat senja.', body2:'Material earthen — batu vulkanik, tanah liat, dan bambu — menciptakan kontras yang indah dengan lanskap laut di luar.',
+    gallery:[{bg:'linear-gradient(135deg,#3A3530,#2A2520)',cap:'Main Dining — Ocean view',dark:false},{bg:'linear-gradient(160deg,#35312C,#26221E)',cap:'Private Dining Room',dark:false},{bg:'linear-gradient(135deg,#30302C,#202020)',cap:'Bar Area',dark:false},{bg:'linear-gradient(160deg,#3F3A35,#2E2A26)',cap:'Open Kitchen',dark:false},{bg:'linear-gradient(135deg,#4A4540,#38342F)',cap:'Outdoor Terrace',dark:false}]}
+];
+
+// ==============================
+//  NAV
+// ==============================
+const nav    = document.getElementById('mainNav');
+const burger = document.getElementById('burger');
+const mob    = document.getElementById('mobMenu');
+
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
+
+burger.addEventListener('click', () => {
+  const open = mob.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
+  mob.classList.remove('open'); burger.classList.remove('open'); document.body.style.overflow = '';
+}));
+
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  const y = scrollY + 130;
+  sections.forEach(s => {
+    const lnk = document.querySelector(`.nav-links a[href="#${s.id}"]`);
+    if (lnk) lnk.classList.toggle('active', y >= s.offsetTop && y < s.offsetTop + s.offsetHeight);
+  });
+}, { passive: true });
+
+// ==============================
+//  FADE-UP
+// ==============================
+const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
+
+// ==============================
+//  CONTACT FORM
+// ==============================
+function submitForm(e) {
+  e.preventDefault();
+  const name = document.getElementById('fname').value.trim();
+  const note = document.getElementById('cNote');
+  if (!name) return;
+  note.textContent = `Terima kasih, ${name}! Kami akan menghubungi Anda segera.`;
+  e.target.reset();
+}
+
+// ==============================
+//  BUILD PORTFOLIO GRID
+// ==============================
+const portoGrid = document.getElementById('portoGrid');
+const cardSizes = ['','tall','wide','','','tall','','wide',''];
+
+PROJECTS.forEach((p, i) => {
+  const sz = cardSizes[i] || '';
+  const isLight = p.cat === 'komersial' || p.cat === 'hospitality';
+  const card = document.createElement('div');
+  card.className = `porto-card ${sz}`.trim();
+  card.dataset.cat = p.cat;
+  card.innerHTML = `
+    <div class="porto-thumb" style="background:${p.bg}">
+      <span class="porto-thumb-lbl ${isLight?'l':'d'}">${p.title}</span>
+    </div>
+    <div class="porto-info" style="border-color:rgba(255,255,255,.12)">
+      <span class="porto-tag">${p.category}</span>
+      <div class="porto-title" style="color:var(--warm)">${p.title}</div>
+      <div class="porto-loc" style="color:rgba(255,255,255,.4)">${p.location} · ${p.year}</div>
+      <span class="porto-hint">Lihat Detail →</span>
+    </div>`;
+  card.addEventListener('click', () => openDetail(p.id));
+  portoGrid.appendChild(card);
+});
+
+// Filter
+document.querySelectorAll('.pf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.f;
+    document.querySelectorAll('.porto-card').forEach(c => c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f));
+  });
+});
+
+// ==============================
+//  DETAIL PANEL
+// ==============================
+const panel = document.getElementById('detailPanel');
+
+function openDetail(id) {
+  const p   = PROJECTS.find(x => x.id === id);
+  const idx = PROJECTS.indexOf(p);
+  if (!p) return;
+
+  // fill hero
+  document.getElementById('dpHeroBg').style.background = p.bg;
+  document.getElementById('dpCat').textContent   = p.category;
+  document.getElementById('dpTitle').textContent = p.title;
+  document.getElementById('dpLoc').textContent   = `${p.location} · ${p.year}`;
+
+  // fill desc
+  document.getElementById('dpDescTitle').textContent = p.descTitle;
+  document.getElementById('dpBody1').textContent     = p.body1;
+  document.getElementById('dpBody2').textContent     = p.body2;
+
+  // fill meta
+  const meta = document.getElementById('dpMeta');
+  meta.innerHTML = [
+    ['Klien', p.client], ['Kategori', p.category],
+    ['Lokasi', p.location], ['Tahun', p.year],
+    ['Luas', p.size], ['Durasi', p.duration]
+  ].map(([l,v]) => `<div class="dp-meta-item"><span class="dp-ml">${l}</span><span class="dp-mv">${v}</span></div>`).join('');
+
+  // fill gallery
+  const gg = document.getElementById('dpGalGrid');
+  gg.innerHTML = '';
+  p.gallery.forEach((g, i) => {
+    const d = document.createElement('div');
+    d.className = 'gal-item';
+    d.style.background = g.bg;
+    d.innerHTML = `<span class="gal-item-lbl ${g.dark?'d':'l'}">${g.cap.split('—')[0].trim()}</span>
+      <div class="gal-hover"><span class="gal-zoom">⊕</span><p class="gal-cap">${g.cap}</p></div>`;
+    d.addEventListener('click', () => openLB(p, i));
+    gg.appendChild(d);
+  });
+
+  // adj projects
+  const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
+  const next = PROJECTS[(idx + 1) % PROJECTS.length];
+  document.getElementById('dpAdj').innerHTML = `
+    <div class="adj-item prev" onclick="openDetail('${prev.id}')">
+      <div class="adj-bg" style="background:${prev.bg}"></div>
+      <div class="adj-content"><span class="adj-lbl">← Proyek Sebelumnya</span><span class="adj-name">${prev.title}</span></div>
+    </div>
+    <div class="adj-item next" onclick="openDetail('${next.id}')">
+      <div class="adj-bg" style="background:${next.bg}"></div>
+      <div class="adj-content"><span class="adj-lbl">Proyek Berikutnya →</span><span class="adj-name">${next.title}</span></div>
+    </div>`;
+
+  panel.classList.add('open');
+  panel.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  panel.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('dpBack').addEventListener('click', closeDetail);
+
+// ESC key to close panel
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (lb.classList.contains('open')) closeLB();
+    else if (panel.classList.contains('open')) closeDetail();
+  }
+});
+
+// ==============================
+//  LIGHTBOX
+// ==============================
+const lb     = document.getElementById('lb');
+const lbBd   = document.getElementById('lbBd');
+const lbImg  = document.getElementById('lbImg');
+const lbPh   = document.getElementById('lbPh');
+const lbCap  = document.getElementById('lbCap');
+const lbCtr  = document.getElementById('lbCtr');
+const lbThs  = document.getElementById('lbThumbs');
+let lbProject = null, lbIdx = 0;
+
+function openLB(project, idx) {
+  lbProject = project;
+  lbIdx = idx;
+  buildLBThumbs();
+  renderLB();
+  lb.classList.add('open');
+  lbBd.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLB() {
+  lb.classList.remove('open');
+  lbBd.classList.remove('open');
+  document.body.style.overflow = 'hidden'; // keep panel scroll locked
+}
+
+function buildLBThumbs() {
+  lbThs.innerHTML = '';
+  lbProject.gallery.forEach((g, i) => {
+    const t = document.createElement('div');
+    t.className = 'lb-th';
+    t.style.background = g.bg;
+    t.addEventListener('click', () => { lbIdx = i; renderLB(); });
+    lbThs.appendChild(t);
+  });
+}
+
+function renderLB() {
+  const g = lbProject.gallery[lbIdx];
+  lbPh.style.background = g.bg;
+  lbPh.style.display = 'block';
+  lbImg.style.display = 'none';
+  if (g.src) { lbImg.src = g.src; lbImg.style.display = 'block'; lbPh.style.display = 'none'; }
+  lbCap.textContent = g.cap;
+  lbCtr.textContent = `${lbIdx + 1} / ${lbProject.gallery.length}`;
+  lbThs.querySelectorAll('.lb-th').forEach((t, i) => t.classList.toggle('active', i === lbIdx));
+  const at = lbThs.querySelector('.lb-th.active');
+  if (at) at.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
+}
+
+document.getElementById('lbClose').addEventListener('click', closeLB);
+lbBd.addEventListener('click', closeLB);
+document.getElementById('lbPrev').addEventListener('click', () => { lbIdx = (lbIdx - 1 + lbProject.gallery.length) % lbProject.gallery.length; renderLB(); });
+document.getElementById('lbNext').addEventListener('click', () => { lbIdx = (lbIdx + 1) % lbProject.gallery.length; renderLB(); });
+
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + lbProject.gallery.length) % lbProject.gallery.length; renderLB(); }
+  if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbProject.gallery.length; renderLB(); }
+});
+
+let touchX = 0;
+lb.addEventListener('touchstart', e => touchX = e.touches[0].clientX, { passive: true });
+lb.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 50) { lbIdx = dx < 0 ? (lbIdx+1) % lbProject.gallery.length : (lbIdx-1+lbProject.gallery.length) % lbProject.gallery.length; renderLB(); }
+});
+</script>
+</body>
+</html>
